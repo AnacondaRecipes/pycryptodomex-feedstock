@@ -1,6 +1,6 @@
 {% set name = "pycryptodomex" %}
-{% set version = "3.10.1" %}
-{% set sha256 = "541cd3e3e252fb19a7b48f420b798b53483302b7fe4d9954c947605d0a263d62" %}
+{% set version = "3.15.0" %}
+{% set sha256 = "7341f1bb2dadb0d1a0047f34c3a58208a92423cdbd3244d998e4b28df5eac0ed" %}
 
 package:
   name: {{ name|lower }}
@@ -16,7 +16,7 @@ source:
     - 0001-Make-load_lib-CONDA_PREFIX-aware.patch  # [unix]
 
 build:
-  number: 1
+  number: 0
   script: '{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv '
 
 requirements:
@@ -27,6 +27,8 @@ requirements:
   host:
     - python
     - pip
+    - setuptools
+    - wheel
   run:
     - python
     - gmp   # [not win]
@@ -57,7 +59,7 @@ test:
     - psutil
 
 about:
-  home: http://www.pycryptodome.org
+  home: https://www.pycryptodome.org
   license: Public Domain/BSD 2-Clause/OCB/MPIR
   license_file: LICENSE.rst
   summary: Cryptographic library for Python
