@@ -31,7 +31,7 @@ requirements:
     - gmp   # [not win]
   run:
     - python
-    - {{ pin_compatible('gmp') }}  # [not win]
+    - gmp  # [not win]
 
 
 test:
