@@ -1,6 +1,6 @@
 {% set name = "pycryptodomex" %}
-{% set version = "3.15.0" %}
-{% set sha256 = "7341f1bb2dadb0d1a0047f34c3a58208a92423cdbd3244d998e4b28df5eac0ed" %}
+{% set version = "3.21.0" %}
+{% set sha256 = "222d0bd05381dd25c32dd6065c071ebf084212ab79bab4599ba9e6a3e0009e6c" %}
 
 package:
   name: {{ name|lower }}
@@ -13,17 +13,16 @@ source:
   patches:
     # ctypes.util.find_library() isn't CONDA_PREFIX aware :'(
     # https://github.com/ContinuumIO/anaconda-issues/issues/1716
-    - 0001-Make-load_lib-CONDA_PREFIX-aware.patch  # [unix]
+    - patches/0001-Make-load_lib-CONDA_PREFIX-aware.patch  # [unix]
 
 build:
   number: 0
-  script: '{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv '
+  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv --no-build-isolation
 
 requirements:
   build:
     - {{ compiler('c') }}
     - patch       # [not win]
-    - m2-patch    # [win]
   host:
     - python
     - pip
@@ -57,11 +56,16 @@ test:
     - Cryptodome.Util
   requires:
     - psutil
+    - pip
+  commands:
+    - pip check
+    - python -m Cryptodome.SelfTest
 
 about:
   home: https://www.pycryptodome.org
-  license: Public Domain/BSD 2-Clause/OCB/MPIR
+  license: Public Domain/BSD 2-Clause
   license_file: LICENSE.rst
+  license_family: Other
   summary: Cryptographic library for Python
   description: |
     PyCryptodome is a self-contained Python package of low-level cryptographic
