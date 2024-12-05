@@ -28,10 +28,9 @@ requirements:
     - pip
     - setuptools
     - wheel
+    - gmp   # [not win]
   run:
     - python
-  run_constrained:
-    - gmp   # [not win]
 
 test:
   imports:
