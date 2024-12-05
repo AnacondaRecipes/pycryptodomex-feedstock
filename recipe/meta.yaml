@@ -31,8 +31,6 @@ requirements:
     - gmp   # [not win]
   run:
     - python
-    - gmp  # [not win]
-
 
 test:
   imports:
