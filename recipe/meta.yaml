@@ -28,9 +28,9 @@ requirements:
     - pip
     - setuptools
     - wheel
-    - gmp   # [not win]
   run:
     - python
+    - gmp   # [not win]
 
 test:
   imports:
@@ -55,7 +55,6 @@ test:
     - Cryptodome.Signature
     - Cryptodome.Util
   requires:
-    - gmp  # [not win]
     - psutil
     - pip
   commands:
