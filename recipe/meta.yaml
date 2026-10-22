@@ -1,5 +1,5 @@
 {% set name = "pycryptodomex" %}
-{% set version = "3.23.0" %}
+{% set version = "3.24.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 71909758f010c82bc99b0abf4ea12012c98962fbf0583c2164f8b84533c2e4da
+  sha256: 09081666ffc599976c0b8b29caf2cf82212c0f05bed233c8f8ed53e4f6e1d356
   patches:
     # ctypes.util.find_library() isn't CONDA_PREFIX aware :'(
     # https://github.com/ContinuumIO/anaconda-issues/issues/1716
