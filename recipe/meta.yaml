@@ -16,6 +16,10 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv --no-build-isolation
+  # gmp is dlopen'd at runtime via ctypes (optional acceleration), never linked at
+  # build time; keep the bare run dep instead of gmp's run_exports pin
+  ignore_run_exports:
+    - gmp  # [not win]
 
 requirements:
   build:
@@ -25,6 +29,7 @@ requirements:
     - python
     - pip
     - setuptools
+    - gmp {{ gmp }}  # [not win]
   run:
     - python
     - gmp  # [not win]
@@ -60,7 +65,7 @@ test:
 
 about:
   home: https://www.pycryptodome.org
-  license: Public Domain/BSD 2-Clause
+  license: BSD-2-Clause AND Unlicense
   license_file: LICENSE.rst
   license_family: Other
   summary: Cryptographic library for Python
