@@ -16,10 +16,6 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv --no-build-isolation
-  # gmp is dlopen'd at runtime via ctypes (optional acceleration), never linked at
-  # build time; keep the bare run dep instead of gmp's run_exports pin
-  ignore_run_exports:
-    - gmp  # [not win]
 
 requirements:
   build:
@@ -29,7 +25,6 @@ requirements:
     - python
     - pip
     - setuptools
-    - gmp {{ gmp }}  # [not win]
   run:
     - python
     - gmp  # [not win]
@@ -76,5 +71,9 @@ about:
   dev_url: https://github.com/Legrandin/pycryptodome
 
 extra:
+  skip-lints:
+    # gmp is loaded at runtime via ctypes (Cryptodome.Util._raw_api.load_lib) and never
+    # linked at build time, so host presence doesn't apply; keep the bare run dep
+    - cbc_dep_in_run_missing_from_host
   recipe-maintainers:
     - nehaljwani
